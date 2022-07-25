@@ -1,0 +1,14 @@
+name: Trigger Preview and Builds Runner to keep "hot and fresh"
+on:
+  schedule:
+    # Every weekday (M-F) at every hour
+    - cron: "0 * * * 1-5"
+jobs:
+  build:
+    name: Trigger Site Rebuild
+    runs-on: ubuntu-latest
+    steps:
+      # CMS Preview
+      - run: curl -X POST -d {} https://webhook.gatsbyjs.com/hooks/data_source/201b9b35-f180-49e5-8b05-0522d16a440d
+      # Builds Runner
+      - run: curl -X POST -d {} https://webhook.gatsbyjs.com/hooks/data_source/publish/201b9b35-f180-49e5-8b05-0522d16a440d
