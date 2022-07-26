@@ -2,31 +2,88 @@
   <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
 </a>
 
-# Cross River x Gatsby Starter Contentful Homepage
-This starter should provide a jumping-off point for familiarizing yourselves with Cloud.
+# Gatsby Starter Contentful Homepage
 
-Helpful Links:
-* [`.env` files](https://drive.google.com/drive/folders/1xAdwZXS6OAOA1pbuZXsDIxT35exsqWWe?usp=sharing)
-* [Contentful space for project](https://app.contentful.com/spaces/kgdgqc0njgh0/home)
-* [Gatsby Cloud workspace](https://www.gatsbyjs.com/dashboard/organization/8a0412e8-a2ff-4435-8805-739de9d8efc2/sites)
+Create a homepage using Gatsby and Contentful. This starter demonstrates how to use Contentful to build a homepage and can be customized to match your own visual branding.
+
+[View the Demo](https://gatsbycontentfulhomepagets.gatsbyjs.io/)
+
+**Note:**
+This version of the Contentful homepage starter is written in TypeScript. If you want to use Contentful but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-contentful-homepage).
 
 ## Quick start
-1. **Clone repo locally**
 
-2. **Get `.env` files from Google drive**
-  Download the 2 `.env` files from the Google drive link above and add them to the root of the Gatsby repo
+You will need a new or existing [Contentful space][] to use this starter and will be asked for your [Space ID][], [Content Management API Key][] (also referred to as a Personal Access Token) and [Content Delivery API Key][] during installation.
 
-3. **`npm install && gatsby develop`**
-   This command will install all project dependencies and start your local development server. Your site should now be running at <http://localhost:8000>
-   
-4. **Start developing**
-   Modify the components and styles in the starter, or make some of your own!
+[contentful space]: https://www.contentful.com/help/contentful-101/#step-2-create-a-space
+[space id]: https://www.contentful.com/help/find-space-id/
+[content delivery api key]: https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app
+[content management api key]: https://www.contentful.com/developers/docs/references/authentication/#the-content-management-api
 
-## Gatsby commands for local development
-`gatsby develop` spins up a 'lite' version of your site, meant to give you a faithful recreation of your site that spins up quickly and features HMR to keep up as you make changes. The develop build is not optimized and as such should not be tested against.
+1. **Create a Gatsby site**
 
-`gatsby build` builds the site as it will be when it goes live. Running `gatsby build && gatsby serve` will give you a running local version of your built site.
+   Use the Gatsby CLI to get started locally:
 
+   ```sh repo
+   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts
+   ```
+
+1. **Run the Contentful setup script**
+
+   From your site's root directory, run:
+
+   ```sh
+   cd my-homepage
+   yarn setup
+   ```
+
+   This will run a script to populate your Contentful space's content model and add demo content.
+
+1. **Start developing**
+
+   In your site directory, start the development server:
+
+   ```sh
+   yarn start
+   ```
+
+   Your site should now be running at <http://localhost:8000>
+
+1. **Open the source code and start editing**
+
+## Deploy your site
+
+Once your content is available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+
+1. Push your local site to a new repo in either GitHub, GitLab, or Bitbucket
+1. Log into your [Gatsby Cloud Dashboard][] and click on **Add a site**
+1. Use the **Import from a Git repository** option to find your site
+1. Add the environment variables from your `.env.production` file to Gatsby Cloud during setup
+1. Click **Build site** and your site should start building
+
+For a more detailed walkthrough, see the tutorial on how to [build your site with Gatsby Cloud][tutorial].
+
+[gatsby cloud dashboard]: https://gatsbyjs.com/dashboard
+[tutorial]: https://www.gatsbyjs.com/docs/tutorial/part-1/#build-your-site-with-gatsby-cloud
+
+### Deploy without using the CLI
+
+Alternatively, you can deploy this starter directly to Gatsby Cloud.
+
+This repository uses the `gatsby-provision` convention to allow for automatic CMS content provisioning during the Deploy Now flow in Gatsby Cloud. After you Quick Connect Contentful to your site, you will be given the option to run the `gatsby-provision` script to populate the selected Contentful space with the site's associated content model and content.
+
+Otherwise, you can always set up your content in Contentful manually before deploying to Gatsby Cloud.
+
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts)
+
+## Setting up Gatsby Cloud Preview
+
+To use Gatsby Cloud Preview with this site, see the documentation for
+[Installing Content Sync for Contentful][].
+
+[installing content sync for contentful]: https://support.gatsbyjs.com/hc/en-us/articles/4410371995539-Installing-Content-Sync-for-Contentful
+[add the gatsby cloud app to contentful]: https://support.gatsbyjs.com/hc/en-us/articles/360056047134-Add-the-Gatsby-Cloud-App-to-Contentful
+[connecting to contentful manually]: https://support.gatsbyjs.com/hc/en-us/articles/360052076554-Connecting-to-Contentful-Manually
 
 ## What's included?
 
@@ -73,13 +130,13 @@ export const colors = {
 If you'd like to add additional colors, add additional keys to this object.
 This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
 
-The UI components file `src/components/ui.js` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
+The UI components file `src/components/ui.tsx` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
 
 ### Add your logo
 
 ![Logo](./docs/images/logo.png)
 
-Replace the `src/components/brand-logo.js` component with your own brand logo.
+Replace the `src/components/brand-logo.tsx` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
 Using an inline SVG for the logo allows it to pick up the colors used in CSS, which is how the logo colors are inverted for the mobile menu.
@@ -90,12 +147,12 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
 
 ![Headings & Buttons](./docs/images/headings-buttons.png)
 
-To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
+To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.tsx` and styles in `src/components/ui.css.ts`.
 
 ### Customize section components
 
 To customize any of the sections of the homepage, edit the relevant component in `src/components`.
-Most of the styles for these components are handled with shared UI components in `src/components/ui.js`.
+Most of the styles for these components are handled with shared UI components in `src/components/ui.tsx`.
 
 ### Create custom section components
 
@@ -158,7 +215,7 @@ For this example, we'll create a new "Banner" component.
 1. Next, create the Banner component:
 
    ```jsx fileExt
-   // src/components/banner.js
+   // src/components/banner.tsx
    import * as React from "react"
    import { graphql } from "gatsby"
    import { Section, Container, Heading, Text } from "./ui"
@@ -183,10 +240,10 @@ For this example, we'll create a new "Banner" component.
    `
    ```
 
-1. Export the component from `src/components/sections.js`
+1. Export the component from `src/components/sections.tsx`
 
    ```js fileExt
-   // src/components/sections.js
+   // src/components/sections.tsx
    export { default as HomepageHero } from "./hero"
    export { default as HomepageFeature } from "./feature"
    export { default as HomepageFeatureList } from "./feature-list"
@@ -201,10 +258,10 @@ For this example, we'll create a new "Banner" component.
    export { default as HomepageBanner } from "./banner"
    ```
 
-1. Add the GraphQL query fragment to the query in `src/pages/index.js`
+1. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
 
    ```js fileExt
-   // in src/pages/index.js
+   // in src/pages/index.tsx
    export const query = graphql`
      {
        homepage {
